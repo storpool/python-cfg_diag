@@ -44,6 +44,14 @@ Contact [the StorPool support team][support] for information.
 
 ## Version history
 
+### 0.1.1
+
+- move some tool configuration options to setup.py and pyproject.toml
+- add Python 3.9 as a supported version
+- use unittest.mock instead of mock
+- fix a code comment
+- add a manifest to include more files in the source distribution
+
 ### 0.1.0
 
 - first public release
