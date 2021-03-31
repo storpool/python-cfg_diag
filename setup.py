@@ -24,7 +24,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 #
-"""Setup configuration for the trivial version comparison module."""
+"""Setup configuration for the common config class module."""
 
 import setuptools  # type: ignore
 
