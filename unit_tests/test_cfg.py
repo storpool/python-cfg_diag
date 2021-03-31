@@ -29,10 +29,11 @@ import dataclasses
 import sys
 import unittest
 
+from unittest import mock
+
 from typing import Any, IO, Optional, Type, Union
 
 import ddt  # type: ignore
-import mock
 import pytest
 
 import cfg_diag
