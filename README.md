@@ -46,6 +46,8 @@ Contact [the StorPool support team][support] for information.
 
 ### 0.2.1
 
+- include the .editorconfig file in the sdist tarball
+
 ### 0.2.0
 
 - drop Python 3.6 as a supported version, add Python 3.10 instead
