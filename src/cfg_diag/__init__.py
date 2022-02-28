@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021  StorPool
+# Copyright (c) 2021, 2022  StorPool
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -63,7 +63,7 @@ import dataclasses
 import sys
 
 
-VERSION = "0.1.1"
+VERSION = "0.2.0"
 
 
 class ConfigDiagBase:

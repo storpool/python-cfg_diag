@@ -44,6 +44,8 @@ Contact [the StorPool support team][support] for information.
 
 ## Version history
 
+### 0.2.0
+
 ### 0.1.1
 
 - move some tool configuration options to setup.py and pyproject.toml
