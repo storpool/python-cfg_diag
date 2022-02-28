@@ -1,3 +1,4 @@
+include .editorconfig
 include LICENSE
 include tox.ini
 recursive-include unit_tests *.py
