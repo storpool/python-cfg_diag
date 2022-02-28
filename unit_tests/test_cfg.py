@@ -31,7 +31,7 @@ import unittest
 
 from unittest import mock
 
-from typing import Any, IO, Optional, Type, Union
+from typing import Any, IO, Optional, Type, Union  # noqa: H301
 
 import ddt  # type: ignore
 import pytest

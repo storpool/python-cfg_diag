@@ -69,7 +69,8 @@ VERSION = "0.2.0"
 class ConfigDiagBase:
     """Output diagnostic messages if requested.
 
-    Child classes MUST define a boolean-like `verbose` attribute!"""
+    Child classes MUST define a boolean-like `verbose` attribute!
+    """
 
     # pylint: disable=too-few-public-methods
 
