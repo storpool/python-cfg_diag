@@ -46,9 +46,7 @@ TEST_CLASSES = (
     cfg_diag.ConfigDiagUnfrozenStdOut,
 )
 
-ConfigType = Union[
-    Type[cfg_diag.ConfigDiag], Type[cfg_diag.ConfigDiagUnfrozen]
-]
+ConfigType = Union[Type[cfg_diag.ConfigDiag], Type[cfg_diag.ConfigDiagUnfrozen]]
 
 
 @ddt.ddt
