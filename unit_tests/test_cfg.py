@@ -75,7 +75,8 @@ def test_no_output(cls: ConfigType) -> None:
     assert not obj.verbose
 
     with mock.patch("builtins.print", new=mock_print):
-        obj.diag("This is not a diagnostic message.")
+        obj.diag_("This is not a diagnostic message.")
+        obj.diag(lambda: "This is not a diagnostic message either.")
 
     assert not res
 
@@ -94,11 +95,16 @@ def test_output(cls: ConfigType) -> None:
     assert obj.verbose
 
     with mock.patch("builtins.print", new=mock_print):
-        obj.diag("This is a diagnostic message.")
+        obj.diag_("This is a diagnostic message.")
+        obj.diag(lambda: "This is also a diagnostic message.")
 
     assert res == [
         (
             "This is a diagnostic message.",
             sys.stdout if to_stdout else sys.stderr,
-        )
+        ),
+        (
+            "This is also a diagnostic message.",
+            sys.stdout if to_stdout else sys.stderr,
+        ),
     ]

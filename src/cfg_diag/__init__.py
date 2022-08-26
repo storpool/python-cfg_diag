@@ -27,9 +27,11 @@
 
 This module provides four classes that may be used as base classes for
 storing program runtime configuration with a `verbose` boolean field.
-The classes provide a `.diag(msg)` method that decides whether to
-output the provided message based on the value of the object's
-`verbose` field.
+The classes provide a `.diag(func)` method that will check the object's
+`verbose` field and, if it is set to a true value, invoke the specified
+function and output the message that it returns. If the message is not
+expensive to format (e.g. it does not include stringifying elaborate
+data structures), the `.diag(msg)` method may be used instead.
 
 The `ConfigDiagUnfrozen` and `ConfigDiagUnfrozenStdOut` classes are
 normal dataclasses, while the `ConfigDiag` and `ConfigDiagStdOut` ones
@@ -55,12 +57,15 @@ Initialize this class from an argument parser object:
 
 Output a diagnostic message if requested:
 
-    cfg.diag("This will either appear or it will not")
+    cfg.diag_("This will either appear or it will not")
+    cfg.diag(lambda: f"Here's the thing: {thing!r}")
 """
 
 
 import dataclasses
 import sys
+
+from typing import Callable
 
 
 VERSION = "0.3.0"
@@ -76,13 +81,17 @@ class ConfigDiagBase:
 
     _config_diag_to_stderr = True
 
-    def diag(self, msg: str) -> None:
-        """Output a diagnostic message if requested."""
+    def diag(self, func: Callable[[], str]) -> None:
+        """Output the diagnostic message returned by the function if requested."""
         if self.verbose:  # type: ignore  # pylint: disable=no-member
             print(
-                msg,
+                func(),
                 file=sys.stderr if self._config_diag_to_stderr else sys.stdout,
             )
+
+    def diag_(self, msg: str) -> None:
+        """Output a diagnostic message if requested."""
+        self.diag(lambda: msg)
 
 
 @dataclasses.dataclass
