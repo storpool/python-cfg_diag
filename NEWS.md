@@ -1,5 +1,7 @@
 # Change log for cfg-diag library
 
+## 0.3.0
+
 ## 0.2.1
 
 - include the .editorconfig file in the sdist tarball
