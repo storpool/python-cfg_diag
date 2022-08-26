@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021  Peter Pentchev <roam@ringlet.net>
+# Copyright (c) 2021, 2022  Peter Pentchev <roam@ringlet.net>
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
@@ -52,8 +52,6 @@ ConfigType = Union[Type[cfg_diag.ConfigDiag], Type[cfg_diag.ConfigDiagUnfrozen]]
 @ddt.ddt
 class TestConfigDiag(unittest.TestCase):
     """Run tests on the ConfigDiag classes."""
-
-    # pylint: disable=no-self-use
 
     @ddt.data(*TEST_CLASSES)
     def test_frozen(self, cls: ConfigType) -> None:
