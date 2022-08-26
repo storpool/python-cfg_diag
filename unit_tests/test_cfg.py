@@ -27,13 +27,11 @@
 
 import dataclasses
 import sys
-import unittest
 
 from unittest import mock
 
 from typing import Any, IO, Optional, Type, Union
 
-import ddt  # type: ignore
 import pytest
 
 import cfg_diag
@@ -49,60 +47,58 @@ TEST_CLASSES = (
 ConfigType = Union[Type[cfg_diag.ConfigDiag], Type[cfg_diag.ConfigDiagUnfrozen]]
 
 
-@ddt.ddt
-class TestConfigDiag(unittest.TestCase):
-    """Run tests on the ConfigDiag classes."""
+@pytest.mark.parametrize("cls", TEST_CLASSES)
+def test_frozen(cls: ConfigType) -> None:
+    """Test some aspect of the ConfigDiag classes."""
+    obj = cls(verbose=False)
+    assert not obj.verbose
 
-    @ddt.data(*TEST_CLASSES)
-    def test_frozen(self, cls: ConfigType) -> None:
-        """Test some aspect of the ConfigDiag classes."""
-        obj = cls(verbose=False)
-        assert not obj.verbose
-
-        if "Unfrozen" in cls.__name__:
-            obj.verbose = True  # type: ignore
-            assert obj.verbose
-        else:
-            with pytest.raises(dataclasses.FrozenInstanceError):
-                obj.verbose = True  # type: ignore
-            assert not obj.verbose
-
-    @ddt.data(*TEST_CLASSES)
-    def test_no_output(self, cls: ConfigType) -> None:
-        """Make sure there is no output with verbose=False."""
-        res = []
-
-        def mock_print(msg: str, file: Optional[IO[Any]] = None) -> None:
-            """Mock the print() builtin function."""
-            res.append((msg, file))
-
-        obj = cls(verbose=False)
-        assert not obj.verbose
-
-        with mock.patch("builtins.print", new=mock_print):
-            obj.diag("This is not a diagnostic message.")
-
-        assert not res
-
-    @ddt.data(*TEST_CLASSES)
-    def test_output(self, cls: ConfigType) -> None:
-        """Make sure something is output with verbose=True."""
-        to_stdout = "StdOut" in cls.__name__
-        res = []
-
-        def mock_print(msg: str, file: Optional[IO[Any]] = None) -> None:
-            """Mock the print() builtin function."""
-            res.append((msg, file))
-
-        obj = cls(verbose=True)
+    if "Unfrozen" in cls.__name__:
+        obj.verbose = True  # type: ignore
         assert obj.verbose
+    else:
+        with pytest.raises(dataclasses.FrozenInstanceError):
+            obj.verbose = True  # type: ignore
+        assert not obj.verbose
 
-        with mock.patch("builtins.print", new=mock_print):
-            obj.diag("This is a diagnostic message.")
 
-        assert res == [
-            (
-                "This is a diagnostic message.",
-                sys.stdout if to_stdout else sys.stderr,
-            )
-        ]
+@pytest.mark.parametrize("cls", TEST_CLASSES)
+def test_no_output(cls: ConfigType) -> None:
+    """Make sure there is no output with verbose=False."""
+    res = []
+
+    def mock_print(msg: str, file: Optional[IO[Any]] = None) -> None:
+        """Mock the print() builtin function."""
+        res.append((msg, file))
+
+    obj = cls(verbose=False)
+    assert not obj.verbose
+
+    with mock.patch("builtins.print", new=mock_print):
+        obj.diag("This is not a diagnostic message.")
+
+    assert not res
+
+
+@pytest.mark.parametrize("cls", TEST_CLASSES)
+def test_output(cls: ConfigType) -> None:
+    """Make sure something is output with verbose=True."""
+    to_stdout = "StdOut" in cls.__name__
+    res = []
+
+    def mock_print(msg: str, file: Optional[IO[Any]] = None) -> None:
+        """Mock the print() builtin function."""
+        res.append((msg, file))
+
+    obj = cls(verbose=True)
+    assert obj.verbose
+
+    with mock.patch("builtins.print", new=mock_print):
+        obj.diag("This is a diagnostic message.")
+
+    assert res == [
+        (
+            "This is a diagnostic message.",
+            sys.stdout if to_stdout else sys.stderr,
+        )
+    ]
