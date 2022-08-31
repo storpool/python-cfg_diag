@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2021, 2022  Peter Pentchev <roam@ringlet.net>
+# Copyright (c) 2021, 2022  StorPool
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
