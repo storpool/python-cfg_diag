@@ -68,7 +68,7 @@ import sys
 from typing import Callable
 
 
-VERSION = "0.3.0"
+VERSION = "0.3.1"
 
 
 class ConfigDiagBase:

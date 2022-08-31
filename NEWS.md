@@ -1,5 +1,7 @@
 # Change log for cfg-diag library
 
+## 0.3.1
+
 ## 0.3.0
 
 - API break: the `.diag()` method now accepts a callable function that
