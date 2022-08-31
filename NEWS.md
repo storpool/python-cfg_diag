@@ -2,6 +2,10 @@
 
 ## 0.3.1
 
+- add the year 2022 to the copyright notices
+- relicense a unit test file to StorPool
+- include the noxfile in the sdist tarball
+
 ## 0.3.0
 
 - API break: the `.diag()` method now accepts a callable function that
