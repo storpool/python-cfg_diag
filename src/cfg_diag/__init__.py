@@ -33,21 +33,21 @@ function and output the message that it returns. If the message is not
 expensive to format (e.g. it does not include stringifying elaborate
 data structures), the `.diag(msg)` method may be used instead.
 
-The `ConfigDiagUnfrozen` and `ConfigDiagUnfrozenStdOut` classes are
-normal dataclasses, while the `ConfigDiag` and `ConfigDiagStdOut` ones
+The `ConfigUnfrozen` and `ConfigUnfrozenStdOut` classes are
+normal dataclasses, while the `Config` and `ConfigStdOut` ones
 are frozen.
 
-The `ConfigDiag` and `ConfigDiagUnfrozen` classes will output any
+The `Config` and `ConfigUnfrozen` classes will output any
 diagnostic messages to the standard error stream, while
-the `ConfigDiagStdOut` and `ConfigDiagUnfrozenStdOut` ones will output
+the `ConfigStdOut` and `ConfigUnfrozenStdOut` ones will output
 the diagnostic messages to the standard output stream.
 
 Example:
 
-Subclass the frozen `ConfigDiag` class, add a program-specific field:
+Subclass the frozen `Config` class, add a program-specific field:
 
     @dataclasses.dataclass(frozen=True)
-    class Config(cfg_diag.ConfigDiag):
+    class Config(cfg_diag.Config):
         '''Runtime configuration for the fribble program.'''
         path: pathlib.Path
 
@@ -71,7 +71,7 @@ from typing import Callable
 VERSION = "0.4.0"
 
 
-class ConfigDiagBase:
+class ConfigBase:
     """Output diagnostic messages if requested.
 
     Child classes MUST define a boolean-like `verbose` attribute!
@@ -95,21 +95,21 @@ class ConfigDiagBase:
 
 
 @dataclasses.dataclass
-class ConfigDiagUnfrozen(ConfigDiagBase):
+class ConfigUnfrozen(ConfigBase):
     """A base class for configuration storage."""
 
     verbose: bool
 
 
 @dataclasses.dataclass(frozen=True)
-class ConfigDiag(ConfigDiagBase):
+class Config(ConfigBase):
     """A frozen base class for configuration storage."""
 
     verbose: bool
 
 
 @dataclasses.dataclass
-class ConfigDiagUnfrozenStdOut(ConfigDiagUnfrozen):
+class ConfigUnfrozenStdOut(ConfigUnfrozen):
     """A base class that outputs diagnostic messages to stdout."""
 
     def __post_init__(self) -> None:
@@ -118,7 +118,7 @@ class ConfigDiagUnfrozenStdOut(ConfigDiagUnfrozen):
 
 
 @dataclasses.dataclass(frozen=True)
-class ConfigDiagStdOut(ConfigDiag):
+class ConfigStdOut(Config):
     """A frozen base class with diagnostic messages output to stdout."""
 
     def __post_init__(self) -> None:

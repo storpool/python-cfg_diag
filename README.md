@@ -10,21 +10,21 @@ function and output the message that it returns. If the message is not
 expensive to format (e.g. it does not include stringifying elaborate
 data structures), the `.diag(msg)` method may be used instead.
 
-The `ConfigDiagUnfrozen` and `ConfigDiagUnfrozenStdOut` classes are
-normal dataclasses, while the `ConfigDiag` and `ConfigDiagStdOut` ones
+The `ConfigUnfrozen` and `ConfigUnfrozenStdOut` classes are
+normal dataclasses, while the `Config` and `ConfigStdOut` ones
 are frozen.
 
-The `ConfigDiag` and `ConfigDiagUnfrozen` classes will output any
+The `Config` and `ConfigUnfrozen` classes will output any
 diagnostic messages to the standard error stream, while
-the `ConfigDiagStdOut` and `ConfigDiagUnfrozenStdOut` ones will output
+the `ConfigStdOut` and `ConfigUnfrozenStdOut` ones will output
 the diagnostic messages to the standard output stream.
 
 ## Example
 
-Subclass the frozen `ConfigDiag` class, add a program-specific field:
+Subclass the frozen `Config` class, add a program-specific field:
 
     @dataclasses.dataclass(frozen=True)
-    class Config(cfg_diag.ConfigDiag):
+    class Config(cfg_diag.Config):
         """Runtime configuration for the fribble program."""
         path: pathlib.Path
 

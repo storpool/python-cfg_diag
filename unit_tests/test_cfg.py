@@ -23,7 +23,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 #
-"""Test the ConfigDiag classes."""
+"""Test the Config classes."""
 
 import dataclasses
 import sys
@@ -38,18 +38,18 @@ import cfg_diag
 
 
 TEST_CLASSES = (
-    cfg_diag.ConfigDiag,
-    cfg_diag.ConfigDiagStdOut,
-    cfg_diag.ConfigDiagUnfrozen,
-    cfg_diag.ConfigDiagUnfrozenStdOut,
+    cfg_diag.Config,
+    cfg_diag.ConfigStdOut,
+    cfg_diag.ConfigUnfrozen,
+    cfg_diag.ConfigUnfrozenStdOut,
 )
 
-ConfigType = Union[Type[cfg_diag.ConfigDiag], Type[cfg_diag.ConfigDiagUnfrozen]]
+ConfigType = Union[Type[cfg_diag.Config], Type[cfg_diag.ConfigUnfrozen]]
 
 
 @pytest.mark.parametrize("cls", TEST_CLASSES)
 def test_frozen(cls: ConfigType) -> None:
-    """Test some aspect of the ConfigDiag classes."""
+    """Test some aspect of the Config classes."""
     obj = cls(verbose=False)
     assert not obj.verbose
 
