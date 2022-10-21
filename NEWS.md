@@ -1,5 +1,7 @@
 # Change log for cfg-diag library
 
+## 0.4.0
+
 ## 0.3.1
 
 - add the year 2022 to the copyright notices
