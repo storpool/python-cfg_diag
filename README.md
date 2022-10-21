@@ -8,7 +8,7 @@ The classes provide a `.diag(func)` method that will check the object's
 `verbose` field and, if it is set to a true value, invoke the specified
 function and output the message that it returns. If the message is not
 expensive to format (e.g. it does not include stringifying elaborate
-data structures), the `.diag(msg)` method may be used instead.
+data structures), the `.diag_(msg)` method may be used instead.
 
 The `ConfigUnfrozen` and `ConfigUnfrozenStdOut` classes are
 normal dataclasses, while the `Config` and `ConfigStdOut` ones
