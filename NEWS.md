@@ -2,6 +2,13 @@
 
 ## 0.4.0
 
+- API break: restore the API of the `ConfigDiag*` class hierarchy: only
+  a single `.diag()` method that accepts a fixed string. Add the new
+  `Config*` class hierarchy with the `.diag(lambda)` and `.diag(string)`
+  API
+- correctly refer to the `.diag_()` method for fixed strings in
+  the documentation
+
 ## 0.3.1
 
 - add the year 2022 to the copyright notices
