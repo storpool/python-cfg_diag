@@ -19,6 +19,14 @@ diagnostic messages to the standard error stream, while
 the `ConfigStdOut` and `ConfigUnfrozenStdOut` ones will output
 the diagnostic messages to the standard output stream.
 
+For compatibility with `cfg-diag` versions 0.1.x and 0.2.x, there is
+also a parallel `ConfigDiag*` class hierarchy; the classes there are
+organized in exactly the same way as those in the `Config*` hierarchy,
+but they only provide a single `.diag(msg)` method that accepts
+a fixed, already-built, string instead of a callback function.
+These classes are deprecated and will most probably be removed in
+a future version of the `cfg-diag` library.
+
 ## Example
 
 Subclass the frozen `Config` class, add a program-specific field:

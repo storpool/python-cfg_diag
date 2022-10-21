@@ -42,6 +42,14 @@ diagnostic messages to the standard error stream, while
 the `ConfigStdOut` and `ConfigUnfrozenStdOut` ones will output
 the diagnostic messages to the standard output stream.
 
+For compatibility with cfg-diag versions 0.1.x and 0.2.x, there is
+also a parallel `ConfigDiag*` class hierarchy; the classes there are
+organized in exactly the same way as those in the `Config*` hierarchy,
+but they only provide a single `.diag(msg)` method that accepts
+a fixed, already-built, string instead of a callback function.
+These classes are deprecated and will most probably be removed in
+a future version of the `cfg-diag` library.
+
 Example:
 
 Subclass the frozen `Config` class, add a program-specific field:
@@ -119,6 +127,57 @@ class ConfigUnfrozenStdOut(ConfigUnfrozen):
 
 @dataclasses.dataclass(frozen=True)
 class ConfigStdOut(Config):
+    """A frozen base class with diagnostic messages output to stdout."""
+
+    def __post_init__(self) -> None:
+        """Redirect the output to the standard output stream."""
+        object.__setattr__(self, "_config_diag_to_stderr", False)
+
+
+class ConfigDiagBase:
+    """Output diagnostic messages if requested.
+
+    Child classes MUST define a boolean-like `verbose` attribute!
+    """
+
+    # pylint: disable=too-few-public-methods
+
+    _config_diag_to_stderr = True
+
+    def diag(self, msg: str) -> None:
+        """Output a diagnostic message if requested."""
+        if self.verbose:  # type: ignore  # pylint: disable=no-member
+            print(
+                msg,
+                file=sys.stderr if self._config_diag_to_stderr else sys.stdout,
+            )
+
+
+@dataclasses.dataclass
+class ConfigDiagUnfrozen(ConfigDiagBase):
+    """A base class for configuration storage."""
+
+    verbose: bool
+
+
+@dataclasses.dataclass(frozen=True)
+class ConfigDiag(ConfigDiagBase):
+    """A frozen base class for configuration storage."""
+
+    verbose: bool
+
+
+@dataclasses.dataclass
+class ConfigDiagUnfrozenStdOut(ConfigDiagUnfrozen):
+    """A base class that outputs diagnostic messages to stdout."""
+
+    def __post_init__(self) -> None:
+        """Redirect the output to the standard output stream."""
+        self._config_diag_to_stderr = False
+
+
+@dataclasses.dataclass(frozen=True)
+class ConfigDiagStdOut(ConfigDiag):
     """A frozen base class with diagnostic messages output to stdout."""
 
     def __post_init__(self) -> None:
