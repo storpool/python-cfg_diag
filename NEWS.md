@@ -8,6 +8,8 @@
   API
 - correctly refer to the `.diag_()` method for fixed strings in
   the documentation
+- add Nix expressions for running the tests
+- start a CONTRIBUTING.md document describing a possible workflow
 
 ## 0.3.1
 
