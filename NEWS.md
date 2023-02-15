@@ -1,6 +1,15 @@
 # Change log for cfg-diag library
 
+All notable changes to the cfg\_diag project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
 ## [Unreleased]
+
+### Other changes
+
+- convert the changelog to the "keep a changelog" format
 
 ## [0.4.0] - 2022-10-22
 
