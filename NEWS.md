@@ -1,6 +1,6 @@
 # Change log for cfg-diag library
 
-## 0.4.0
+## 0.4.0 - 2022-10-22
 
 - API break: restore the API of the `ConfigDiag*` class hierarchy: only
   a single `.diag()` method that accepts a fixed string. Add the new
@@ -11,13 +11,13 @@
 - add Nix expressions for running the tests
 - start a CONTRIBUTING.md document describing a possible workflow
 
-## 0.3.1
+## 0.3.1 - 2022-09-01
 
 - add the year 2022 to the copyright notices
 - relicense a unit test file to StorPool
 - include the noxfile in the sdist tarball
 
-## 0.3.0
+## 0.3.0 - 2022-08-27
 
 - API break: the `.diag()` method now accepts a callable function that
   will only be invoked if needed; it must return the string to be output
@@ -34,11 +34,11 @@
   - use types-setuptools and drop a `type: ignore` annotation
 - add a Nox definitions file
 
-## 0.2.1
+## 0.2.1 - 2022-02-28
 
 - include the .editorconfig file in the sdist tarball
 
-## 0.2.0
+## 0.2.0 - 2022-02-28
 
 - drop Python 3.6 as a supported version, add Python 3.10 instead
 - reformat the source code using black 22 and 100 characters per line
@@ -48,7 +48,7 @@
 - add an EditorConfig definitions file
 - add a flake8 + hacking Tox test environment
 
-## 0.1.1
+## 0.1.1 - 2021-03-31
 
 - move some tool configuration options to setup.py and pyproject.toml
 - add Python 3.9 as a supported version
@@ -56,6 +56,6 @@
 - fix a code comment
 - add a manifest to include more files in the source distribution
 
-## 0.1.0
+## 0.1.0 - 2021-03-31
 
 - first public release
